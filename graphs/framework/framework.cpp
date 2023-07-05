@@ -13,7 +13,7 @@ std::deque<int> alg_topological_sort(Graph& G)
 
     for (auto it = G.begin(); it != G.end(); ++it)
     {
-        _impl_alg_topological_sort(G, it->v, v_visited, curIdx, v_topo_order);
+        _impl_alg_topological_sort_rec(G, it->v, v_visited, curIdx, v_topo_order);
     }
 
     return v_topo_order;
@@ -22,7 +22,6 @@ std::deque<int> alg_topological_sort(Graph& G)
 std::vector<std::vector<int>> alg_kosaraju(Graph& G)
 {
     std::vector<std::vector<int>> vec_scc;
-
     Graph revG = G.reverseEdges();
 
     return vec_scc;
