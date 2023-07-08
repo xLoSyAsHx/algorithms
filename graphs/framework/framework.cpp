@@ -19,10 +19,24 @@ std::deque<int> alg_topological_sort(Graph& G)
     return v_topo_order;
 }
 
-std::vector<std::vector<int>> alg_kosaraju(Graph& G)
+std::map<int, std::vector<int>> alg_kosaraju(Graph& G)
 {
-    std::vector<std::vector<int>> vec_scc;
+    std::map<int, std::vector<int>> vec_scc;
+    std::vector<bool>             v_visited(G.numV(), false);
     Graph revG = G.reverseEdges();
+
+    auto revg_topo_sort = alg_topological_sort(revG);
+
+    int curSCC = 0;
+    for (auto it = revg_topo_sort.cbegin(); it != revg_topo_sort.cend(); ++it)
+    {
+        int v2 = G[*it].v;
+        if (v_visited[v2])
+            continue;
+
+        curSCC += 1;
+        _impl_alg_dfs_scc(G, v2, v_visited, curSCC, vec_scc);
+    }
 
     return vec_scc;
 }

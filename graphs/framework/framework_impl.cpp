@@ -42,3 +42,19 @@ void _impl_alg_dfs_iter(Graph& G, int v, std::vector<bool>& v_visited, std::dequ
         }
     }
 }
+
+void _impl_alg_dfs_scc(Graph& G, int v, std::vector<bool>& v_visited, int curSCC, std::map<int, std::vector<int>>& vec_scc)
+{
+    if (v_visited[v])
+        return;
+
+    v_visited[v] = true;
+    vec_scc[curSCC].emplace_back(v);
+    for (auto& el : G[v].adjVert)
+    {
+        if (v_visited[el])
+            continue;
+
+        _impl_alg_dfs_scc(G, el, v_visited, curSCC, vec_scc);
+    }
+}

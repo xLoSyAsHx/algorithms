@@ -17,6 +17,8 @@ class Graph
     using AdjacencyListType = GraphAdjVect;
 public:
 
+    friend void print_graph(const Graph& g);
+
     class GraphIter {
     public:
 
@@ -75,3 +77,5 @@ private:
     bool m_bOriented = false;
     std::vector<AdjacencyListType> m_G;
 };
+
+void print_graph(const Graph& g);

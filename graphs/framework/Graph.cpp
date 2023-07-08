@@ -22,6 +22,7 @@ GErr Graph::readInputFromBook(std::vector<GraphAdjVect>& adjList, bool bOriented
             return G_INVALID_INPUT;
         }
 
+        m_G[v].v = v;
         m_G[v].adjVert.resize(el.adjVert.size());
 
         for (int i = 0; i < el.adjVert.size(); ++i)
@@ -53,5 +54,19 @@ Graph Graph::reverseEdges()
         ++v;
     }
 
+    for (auto v = 0; v < m_G.size(); ++v)
+        GRev.m_G[v].v = v;
+
     return GRev;
+}
+
+void print_graph(const Graph& g)
+{
+    for (const auto it : g.m_G)
+    {
+        std::cout << std::endl << it.v + 1 << " -> ";
+        for (const auto w : it.adjVert)
+            std::cout << w + 1 << ' ';
+    }
+    std::cout << std::endl;
 }
